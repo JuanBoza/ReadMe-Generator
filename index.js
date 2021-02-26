@@ -1,9 +1,10 @@
-// array of questions for user
+const inquirer = require("inquirer"); 
+const fs = require("fs"); 
+const generateMarkdown = require("./utils/generateMarkdown.js")
 
 
-function readMePrompt(){ 
-    return inquirer.prompt([
 
+const questions = [
         {
             type: 'input', 
             name: 'projectTitle',
@@ -97,24 +98,20 @@ function readMePrompt(){
         },
 
      
-    ]);
-}
+    ];
+    
 
-
-
-
-// function to write README file
 function writeToFile(fileName, data) {
+    fs.writeFileSync(fileName, data);
 }
 
-// function to initialize program
 function init() {
-
-    const answers = await readMePrompt(); 
-    const generateContent = generateReadme(answers);
-
+    inquirer
+    .prompt(questions)
+    .then(answers => {
+      writeToFile("README.md", generateMarkdown.generateMarkdown(answers));
+    });
 }
 
-// function call to initialize program
 init();
 
