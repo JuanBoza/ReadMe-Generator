@@ -17,7 +17,7 @@ const questions = [
         }, 
         {
             type: 'input', 
-            name: 'Table of Contents',
+            name: 'tableOfContents',
             message: 'Input your Table of Contents:', 
         }, 
         {
@@ -73,17 +73,17 @@ const questions = [
         }, 
         {
             type: 'input', 
-            name: 'Contributors ',
+            name: 'contributors ',
             message: 'List of those that have contributed to the project:', 
         }, 
         {
             type: 'input', 
-            name: 'Tests',
+            name: 'tests',
             message: 'What tests have been ran on the project?', 
         },
         {
             type: 'input', 
-            name: 'Questions',
+            name: 'questions',
             message: 'Any Questions?', 
         },
         {
@@ -101,17 +101,27 @@ const questions = [
     ];
     
 
-function writeToFile(fileName, data) {
-    fs.writeFileSync(fileName, data);
-}
 
 function init() {
     inquirer
     .prompt(questions)
     .then(answers => {
-      writeToFile("README.md", generateMarkdown.generateMarkdown(answers));
+      fs.writeFile("README.md", data.generateMarkdown(answers));
     });
 }
 
 init();
 
+/* Doesnt Work 
+  let projectTitle = data.projectTitle; 
+  let description = data.description; 
+  let tableOfContents = data.tableOfContents; 
+  let installation = data.installation; 
+  let usage = data.usage; 
+  let license = data.license; 
+  let contributors = data.contributors; 
+  let tests = data.Tests; 
+  let questions = data.Questions; 
+  let username = data.username; 
+  let contactInfo = data.username; 
+*/ 
