@@ -1,6 +1,6 @@
 const inquirer = require("inquirer"); 
 const fs = require("fs"); 
-const generateMarkdown = require("./utils/generateMarkdown.js")
+const generateMarkdown = require("./utils/generateMarkdown.js").default
 
 
 
@@ -100,17 +100,20 @@ const questions = [
      
     ];
     
+    function init() {
+        inquirer
+        .prompt(questions)
+        .then(answers => {
+          fs.writeFileSync("README.md",generateMarkdown(answers));
+        });
+    }
+        
+    
+    
+    // function call to initialize program
+    init();
 
 
-function init() {
-    inquirer
-    .prompt(questions)
-    .then(answers => {
-      fs.writeFile("README.md", data.generateMarkdown(answers));
-    });
-}
-
-init();
 
 /* Doesnt Work 
   let projectTitle = data.projectTitle; 
